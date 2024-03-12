@@ -1,0 +1,7 @@
+{
+  "name": "wlxpainel",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

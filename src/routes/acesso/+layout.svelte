@@ -11,8 +11,8 @@
 
 	const style = {
 		container: `bg-slate-400 h-screen overflow-hidden relative `,
-		main: `h-screen overflow-auto pb-36 pt-4 px-2 md:pb-8 lg:px-4`,
-		mainContainer: `flex flex-col h-screen pl-0 w-full lg:pl-20 lg:space-y-4`
+		main: `h-screen overflow-auto pb-36 md:pb-8`,
+		mainContainer: `flex flex-col h-screen pl-0 w-full lg:pl-20 `
 	};
 
 	if (browser) {
@@ -29,12 +29,13 @@
 <AnimatedRoute>
 
 <div class={style.container} >
+	<TopBar />
 	<div class="flex items-start">
 
 		<Overlay />
-		<Sidebar mobileOrientation="end"  />
+		<Sidebar mobileOrientation="end" />
 		<div class={style.mainContainer}>
-			<TopBar />
+			
 			<main class={style.main}>
 				<slot />
 			</main>

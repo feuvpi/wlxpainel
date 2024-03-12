@@ -1,16 +1,11 @@
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ cookies }) => {
-
+export const load = (async ({ cookies, locals }) => {
     const token = cookies.get('token')
     let clientes;
-
     if(token) {
-
         clientes = await getCooperativas(token)
-        // console.log(cooperativas)
     }
-        
     if(!clientes)
         return {};
 
@@ -33,7 +28,7 @@ const getCooperativas = async (token: string) => {
 
     // console.log(await response.text())
     const responseData = await response.json()
-    
+
     return responseData;
 };
 

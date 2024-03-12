@@ -11,8 +11,8 @@
 		},
 		container: ` pb-32 lg:pb-12`,
 		close: `duration-700 ease-out hidden transition-all lg:w-24`,
-		default: `shadow-lg h-screen overflow-y-auto top-0 lg:absolute lg:block lg:z-40 z-10`,
-		open: `absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64`
+		default: `shadow-lg h-screen top-0 lg:block lg:z-1`,
+		open: `absolute md:relative duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64`
 	};
 
 	export let mobileOrientation = 'end';

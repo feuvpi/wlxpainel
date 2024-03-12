@@ -2,7 +2,7 @@
 	import { openSidebar } from '$lib/stores/store';
 </script>
 
-<header class="bg-slate-200 h-22 items-center relative shadow-lg w-full z-10">
+<header class="bg-slate-200 h-22 items-center relative shadow-lg w-full z-99">
 	<div class="flex flex-center flex-col h-full justify-center mx-auto px-3 relative">
 		<div class="flex items-center pl-1 relative w-full sm:ml-0 sm:pr-2 lg:max-w-68">
 			<div class="flex left-0 relative w-3/4">
