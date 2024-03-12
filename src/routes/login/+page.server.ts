@@ -13,7 +13,6 @@ export const actions = {
 			return fail(400, { login, missing: true });
 		}
         
-
             const response = await fetch(`${api_url}/Authentication/login`,
             {
                 method: "POST",
@@ -23,6 +22,12 @@ export const actions = {
         ) 
         if(response.ok){ 
             const token = await response.text();
+            cookies.set('token', token, {
+                path: '/',
+                httpOnly: true,
+                sameSite: 'strict',
+                maxAge: 60 * 60 * 24
+            })
             const authToken = jwt.sign({ authedUser:login, token: token }, import.meta.env.VITE_SECRET_INGREDIENT,{expiresIn:'24h'});
             cookies.set('authToken', authToken, {
                 path: '/',

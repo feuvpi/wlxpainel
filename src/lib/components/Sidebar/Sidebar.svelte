@@ -1,7 +1,6 @@
 <script>
 // @ts-nocheck
-
-	import { sidebarOpen } from '$lib/utils/store';
+	import { sidebarOpen } from '$lib/stores/store';
 	import SidebarItems from './SidebarItems.svelte';
 	import SidebarHeader from './SidebarHeader.svelte';
 
@@ -12,7 +11,7 @@
 		},
 		container: ` pb-32 lg:pb-12`,
 		close: `duration-700 ease-out hidden transition-all lg:w-24`,
-		default: `backdrop-blur-md bg-black/60 h-screen overflow-y-auto top-0 lg:absolute lg:block lg:z-40`,
+		default: `shadow-lg h-screen overflow-y-auto top-0 lg:absolute lg:block lg:z-40 z-10`,
 		open: `absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64`
 	};
 
@@ -21,7 +20,7 @@
 
 <aside
 	class={`${style.default} ${style.mobileOrientation[mobileOrientation]}
-       ${$sidebarOpen ? style.open : style.close} scrollbar`}
+       ${$sidebarOpen ? style.open : style.close} scrollbar`} style="background-image: linear-gradient(0deg, hsla(169, 64%, 44%, 1), hsla(202, 99%, 37%, 1));"
 >
 	<div class={style.container}>
 		<SidebarHeader />

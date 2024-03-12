@@ -1,7 +1,5 @@
 <script>
-// @ts-nocheck
-
-	import { closeSidebar, sidebarOpen } from '$lib/utils/store';
+	import { closeSidebar, sidebarOpen } from '$lib/stores/store';
 </script>
 
 <!-- Overlay will only be visible on small screens to emphasize the focus on sidebar when it is open.-->
