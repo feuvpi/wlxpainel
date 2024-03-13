@@ -10,7 +10,7 @@
 	import AnimatedRoute from '$lib/components/AnimatedRoute.svelte';
 
 	const style = {
-		container: `bg-slate-400 h-screen overflow-hidden relative `,
+		container: ` h-screen overflow-hidden relative `,
 		main: `h-screen overflow-auto pb-36 md:pb-8`,
 		mainContainer: `flex flex-col h-screen pl-0 w-full lg:pl-20 `
 	};
