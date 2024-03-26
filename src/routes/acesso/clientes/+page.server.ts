@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async ({ cookies, locals }) => {
     const token = cookies.get('token')
@@ -11,6 +11,15 @@ export const load = (async ({ cookies, locals }) => {
 
     return {clientes: clientes}
 }) satisfies PageServerLoad;
+
+export const actions = {
+	default: async ({ request, cookies }) => {
+		const data = await request.formData();
+        const nomeFantasia = data.get('nomeFantasia');
+        const razaoSocial = data.get('razaoSocial');
+        const cnpj = data.get('cnpj');
+	},
+} satisfies Actions;
 
 
 const getCooperativas = async (token: string) => {

@@ -26,14 +26,14 @@ export const actions = {
                 path: '/',
                 httpOnly: true,
                 sameSite: 'strict',
-                maxAge: 60 * 60 * 24
+                maxAge: 60 * 60 * 1.9
             })
             const authToken = jwt.sign({ authedUser:login, token: token }, import.meta.env.VITE_SECRET_INGREDIENT,{expiresIn:'24h'});
             cookies.set('authToken', authToken, {
                 path: '/',
                 httpOnly: true,
                 sameSite: 'strict',
-                maxAge: 60 * 60 * 24
+                maxAge: 60 * 60 * 1.9
             });
             throw redirect(302, '/acesso/dashboard');
         } else {

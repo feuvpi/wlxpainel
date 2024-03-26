@@ -13,11 +13,11 @@
         </div>
         <form action="/login" method="POST">
           <div class="mb-4 text-lg flex justify-center">
-            <input class="focus:border-teal-600 focus:border-4 rounded-3xl bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="email" placeholder="id@email.com" />
+            <input class="focus:border-teal-600 border-4 border-transparent rounded-3xl bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="email" placeholder="id@email.com" />
           </div>
   
           <div class="flex justify-center mb-4 text-lg">
-            <input class="focus:border-teal-600 focus:border-4 rounded-3xl  bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="password" placeholder="*********" />
+            <input class="focus:border-teal-600 border-transparent border-4 rounded-3xl  bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="password" placeholder="*********" />
           </div>
           <div class="mt-8 flex justify-center text-lg text-black">
             <button type="submit" class="rounded-3xl bg-sky-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
