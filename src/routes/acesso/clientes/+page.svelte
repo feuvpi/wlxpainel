@@ -41,8 +41,8 @@
   $: cnpj = p ? p.cnpj : "";
 
 </script>
-<div class="sticky top-0 bg-white z-50">
-  <h1 class="font-bold my-8 text-4xl font-mono text-left px-4">Lista de Clientes</h1>
+<div class="sticky top-0 bg-white z-1">
+  <h1 class="font-bold my-8 text-4xl font-mono text-left mx-12">Lista de Clientes</h1>
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mx-12 my-4">
     <Card.Root>
       <Card.Header

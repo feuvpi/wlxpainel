@@ -14,13 +14,13 @@ export const data = [
 		link: '/acesso/dashboard'
 	},
 	{
-		title: 'Produtos',
-		icon: BillsIcon,
-		link: '/acesso/produtos'
-	},
-	{
 		title: 'Clientes',
 		icon: ApplicationIcon,
 		link: '/acesso/clientes'
+	},
+	{
+		title: 'Produtos',
+		icon: BillsIcon,
+		link: '/acesso/produtos'
 	}
 ];

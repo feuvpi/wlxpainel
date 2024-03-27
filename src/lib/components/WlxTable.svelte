@@ -27,7 +27,7 @@
 <!-- <div class="overflow-hidden min-w-full pl-2 mt-4 ml-8"> -->
   <!-- <Button class="bg-slate-400">Adicionar</Button> -->
 
-  <Table.Root class="w-fit px-8 self-center border-red-500 scroll-table" >
+  <Table.Root class="w-fit px-8 self-center border-red-500 scroll-table overflow-hidden" >
     <Table.Caption>Lista de Clientes</Table.Caption>
     <Table.Header>
       <Table.Row>

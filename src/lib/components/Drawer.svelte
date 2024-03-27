@@ -61,7 +61,7 @@
           Ativo
         </Label>
         </div>
-
+        <Button type="submit" class=" bg-teal-400 hover:bg-teal-500">Salvar</Button>
       </form>
     </Dialog.Content>
   </Dialog.Root>

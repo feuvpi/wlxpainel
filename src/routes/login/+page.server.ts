@@ -35,7 +35,7 @@ export const actions = {
                 sameSite: 'strict',
                 maxAge: 60 * 60 * 1.9
             });
-            throw redirect(302, '/acesso/dashboard');
+            throw redirect(302, '/acesso/clientes');
         } else {
             return fail(422, { errors: await response.json() });
     }
