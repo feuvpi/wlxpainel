@@ -1,46 +1,18 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import WlxTable from "$lib/components/WlxTable.svelte";    
-  import * as Dialog from "$lib/components/ui/dialog/index.js";
-  import * as Drawer from "$lib/components/ui/drawer/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { Checkbox } from "$lib/components/ui/checkbox/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
   import { mediaQuery } from "svelte-legos";
 	import { onMount } from 'svelte';
-
-   // Function to handle scroll behavior
-  //  function handleScroll() {
-  //   const title = document.querySelector('.scroll-title');
-  //   const table = document.querySelector('.scroll-table');
-
-  //   // Calculate the offset for docking the title
-  //   const offset = table!.getBoundingClientRect().top;
-
-  //   // If the table scrolls out of view, dock the title
-  //   if (offset <= 0) {
-  //     title!.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'z-10', 'bg-white', 'shadow-md');
-  //   } else {
-  //     title!.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'z-10', 'bg-white', 'shadow-md');
-  //   }
-  // }
-
   import ControlBar from '$lib/components/ControlBar.svelte';
 	import * as Card from "$lib/components/ui/card/index";
-
   export let data: PageData;
-  let open = false;
-  let checked = false;
-  const clientes = data.clientes;
-  const isDesktop = mediaQuery("(min-width: 768px)");
-  let p: { nomeFantasia: any; razaoSocial: any; cnpj: any; };
-  let clientId = ""
-  $: nomeFantasia = p ? p.nomeFantasia : "";
-  $: razaoSocial = p ? p.razaoSocial : "";
-  $: cnpj = p ? p.cnpj : "";
 
+  const clientes = data.clientes;
+  let p: { nomeFantasia: any; razaoSocial: any; cnpj: any; };
+"";
 </script>
+
+
 <div class="sticky top-0 bg-white z-1">
   <h1 class="font-bold my-8 text-4xl font-mono text-left mx-12">Lista de Clientes</h1>
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mx-12 my-4">

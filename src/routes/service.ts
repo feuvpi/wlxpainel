@@ -21,7 +21,6 @@ export const getCooperativas = async (cookie: string) => {
     const token = decodedToken.token;
 
     const api_url = import.meta.env.VITE_API_BASE_URL
-    console.log(api_url)
     const response = await fetch(`${api_url}/Cooperativa`, {
       method: 'GET', // or any other method
       headers: { token },

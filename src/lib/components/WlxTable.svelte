@@ -9,7 +9,6 @@
 
 
     export let clientes;
-     console.log(clientes)
 
      export let cliente2;
 
