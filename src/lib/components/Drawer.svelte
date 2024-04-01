@@ -11,7 +11,7 @@
   const isDesktop = mediaQuery("(min-width: 768px)");
   let open = false;
   
-  export let cliente: { nomeFantasia: any; razaoSocial: any; cnpj: any; };
+  export let cliente: { nomeFantasia: any; razaoSocial: any; cnpj: any; removido: any; };
     let clientId = ""
     $: nomeFantasia = cliente ? cliente.nomeFantasia : "";
     $: razaoSocial = cliente ? cliente.razaoSocial : "";
@@ -20,7 +20,7 @@
     $: title = cliente ? "Editar Cliente" : "Adicionar Cliente";
     $: btnTitle = cliente ? "Editar" : "Adicionar";
   
-    let checked = false;
+    let checked =  cliente && cliente.removido? false: true;
   </script>
 
 {#if $isDesktop}
