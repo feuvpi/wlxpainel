@@ -12,7 +12,7 @@
 	const style = {
 		container: ` h-screen overflow-hidden relative `,
 		main: `h-screen overflow-auto pb-36 md:pb-8`,
-		mainContainer: `flex flex-col h-screen pl-0 w-full lg:pl-20 `
+		mainContainer: `flex flex-col h-screen bg-slate-100 pl-0 w-full pb-4`
 	};
 
 	if (browser) {

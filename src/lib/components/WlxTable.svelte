@@ -1,16 +1,11 @@
 <script>
 // @ts-nocheck
-    import * as Table from "$lib/components/ui/table";
-    import Delete from "carbon-icons-svelte/lib/Delete.svelte";
-    import Edit from "carbon-icons-svelte/lib/Edit.svelte";
-    import { Button } from "$lib/components/ui/button/index.ts";
-    import Drawer from "$lib/components/Drawer.svelte"
-    import * as Card from "$lib/components/ui/card/index.ts";
+import * as Table from "$lib/components/ui/table";
+import Delete from "carbon-icons-svelte/lib/Delete.svelte";
+import Drawer from "$lib/components/Drawer.svelte"
 
-
-    export let clientes;
-
-     export let cliente2;
+export let clientes;
+export let cliente2;
 
      function handleEdit(cliente){
       console.log("Entrei")
@@ -26,7 +21,7 @@
 <!-- <div class="overflow-hidden min-w-full pl-2 mt-4 ml-8"> -->
   <!-- <Button class="bg-slate-400">Adicionar</Button> -->
 
-  <Table.Root class="w-fit px-8 self-center border-red-500 scroll-table overflow-hidden" >
+  <Table.Root class="w-fit px-8 self-center border-red-500 scroll-table overflow-hidden " >
     <Table.Caption>Lista de Clientes</Table.Caption>
     <Table.Header>
       <Table.Row>

@@ -1,20 +1,24 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import WlxTable from "$lib/components/WlxTable.svelte";    
-  import { mediaQuery } from "svelte-legos";
-	import { onMount } from 'svelte';
   import ControlBar from '$lib/components/ControlBar.svelte';
 	import * as Card from "$lib/components/ui/card/index";
+  import aggregatedStore from '$lib/stores/Aggregated';
+
   export let data: PageData;
+
+  // -- store dos dados agregados, testar e depois sincronizar com chamadas na API
+  aggregatedStore.update((aggregatedData) => {
+        return [aggregatedData]
+      })
 
   const clientes = data.clientes;
   let p: { nomeFantasia: any; razaoSocial: any; cnpj: any; };
 "";
 </script>
 
-
 <div class="sticky top-0 bg-white z-1">
-  <h1 class="font-bold my-8 text-4xl font-mono text-left mx-12">Lista de Clientes</h1>
+  <h1 class="font-bold mb-8 pt-6 text-4xl font-mono text-left mx-12">Lista de Clientes</h1>
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mx-12 my-4">
     <Card.Root>
       <Card.Header
@@ -65,21 +69,16 @@
       </Card.Content>
     </Card.Root>
   </div>
-  <ControlBar {p}/>
+  <ControlBar {p} AggregatedData={data.aggregatedData}/>
 </div>
 
-<div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 mt-4 justify-center" >
-
-
-
+<div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 justify-center bg-white" >
 <!-- component -->
-<div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 mt-4 justify-center">
-  <!-- Your scrolling component goes here -->
-  <!-- Assuming this is where your scrolling component goes -->
-  <WlxTable bind:cliente2={p} {clientes}></WlxTable>
-</div>
-
-
+  <div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 mt-4 justify-center bg-white">
+    <!-- Your scrolling component goes here -->
+    <!-- Assuming this is where your scrolling component goes -->
+    <WlxTable bind:cliente2={p} {clientes}></WlxTable>
+  </div>
 </div>
 
 

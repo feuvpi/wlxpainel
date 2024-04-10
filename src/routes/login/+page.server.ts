@@ -39,5 +39,5 @@ export const actions = {
         } else {
             return fail(422, { errors: await response.json() });
     }
-}
+    }
 }
