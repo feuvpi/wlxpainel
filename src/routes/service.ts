@@ -19,22 +19,13 @@ export const getCooperativas = async (cookie: string) => {
     const decodedToken = jwt.verify(cookie, import.meta.env.VITE_SECRET_INGREDIENT) as AuthToken;
     
     const token = decodedToken.token;
-
     const api_url = import.meta.env.VITE_API_BASE_URL
     const response = await fetch(`${api_url}/Cooperativa`, {
       method: 'GET', // or any other method
       headers: { token },
       credentials: 'include', // Include cookies in the request
     });
-
-    // console.log(await response.text())
     const resp = await response.text();
     return { resp };
 
-    // if (response.headers.get('content-type')?.includes('application/json')) {
-    //     const json = await response.json();
-    //     return { response, json };
-    // } else {
-    //     return { response };
-    // }
 };

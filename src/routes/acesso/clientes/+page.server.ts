@@ -38,7 +38,6 @@ export const load = (async ({ cookies, locals }) => {
     if(token) {
         clientes = await getCooperativas(token);
         clientes2 = await getListaDeClientes(token)
-        //console.log(clientes2)
         aggregatedData = GetAggregateData(clientes2);
     }
     if(!clientes)
@@ -79,7 +78,6 @@ const getCooperativas = async (token: string) => {
         credentials: 'include', // Include cookies in the request if needed
     });
 
-    // console.log(await response.text())
     const responseData = await response.json()
 
     return responseData;
@@ -95,7 +93,6 @@ const getListaDeClientes = async (token: string) => {
         credentials: 'include', // Include cookies in the request if needed
     });
 
-    // console.log(await response.text())
     const responseData = await response.json()
 
     return responseData;

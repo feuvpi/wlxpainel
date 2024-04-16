@@ -3,10 +3,9 @@ import type { AggregatedData } from '$lib/interfaces/AggregatedData';
 import type { ListaDeCliente } from '$lib/interfaces/ListaDeCliente';
 import aggregatedStore from '$lib/stores/Aggregated';
 
+// let aggregatedData: { [monthYear: string]: AggregatedData } = {};
+let aggregatedData: AggregatedData[];
 
-let aggregatedData: { [monthYear: string]: AggregatedData } = {};
-
-// let aggregatedData: AggregatedData[];
 
 export const load = (async ({ cookies, locals }) => {
   const token = cookies.get('token')
@@ -15,15 +14,9 @@ export const load = (async ({ cookies, locals }) => {
       clientes = await getCooperativas(token);
       let clientes2: ListaDeCliente[];
       clientes2 = await getListaDeClientes(token)
-      //console.log(clientes2)
       aggregatedData = GetAggregateData(clientes2);
-      // aggregatedStore.update((aggregatedData) => {
-      //   return [aggregatedData]
-      // })
+      console.log(clientes2)
   }
-  // if(!clientes)
-  //     return {};
-  // console.log(aggregatedData)
   return {aggregatedData: aggregatedData}
 }) satisfies PageServerLoad;
 
@@ -36,6 +29,7 @@ function updatedAggregatedStore(data: any) {
 }
 
 const api_url = import.meta.env.VITE_API_BASE_URL
+
 const getListaDeClientes = async (token: string) => {
     const response = await fetch(`${api_url}/ListaDeClientes`, {
         method: 'GET', // or any other method
@@ -45,10 +39,7 @@ const getListaDeClientes = async (token: string) => {
         },
         credentials: 'include', // Include cookies in the request if needed
     });
-
-    // console.log(await response.text())
     const responseData = await response.json()
-
     return responseData;
 };
 
@@ -62,41 +53,80 @@ const getCooperativas = async (token: string) => {
       credentials: 'include', // Include cookies in the request if needed
   });
 
-  // console.log(await response.text())
   const responseData = await response.json()
-
   return responseData;
 };
 
-function GetAggregateData(data: ListaDeCliente[]): { [key: string]: AggregatedData } {
-  const aggregatedData: { [key: string]: AggregatedData } = {};
+function GetAggregateData(data: ListaDeCliente[]): AggregatedData[] {
+  const aggregatedDataArray: AggregatedData[] = [];
 
   data.forEach(obj => {
     const monthYear = obj.mesreferente.slice(0, 7);
+    let aggregatedData = aggregatedDataArray.find(item => item.mesAno === monthYear);
 
-    if (!aggregatedData[monthYear]) {
-      aggregatedData[monthYear] = {
+    if (!aggregatedData) {
+      aggregatedData = {
         mesAno: monthYear,
         quantidadeGlosa: 0,
         licencasAtivas: 0,
+        cooperadosAtivos: 0,
         recebido: 0,
         faturado: 0,
         glosado: 0,
         distinctCNPJCount: 0
       };
+      aggregatedDataArray.push(aggregatedData);
     }
 
-    aggregatedData[monthYear].quantidadeGlosa += obj.quantidadeGlosa;
-    aggregatedData[monthYear].licencasAtivas += obj.medicalLicencasAtivas;
-    aggregatedData[monthYear].recebido += obj.recebido;
-    aggregatedData[monthYear].faturado += obj.faturado;
-    aggregatedData[monthYear].glosado += obj.glosado;
+    aggregatedData.quantidadeGlosa += obj.quantidadeGlosa;
+    aggregatedData.licencasAtivas += obj.medicalLicencasAtivas;
+    aggregatedData.cooperadosAtivos += obj.cooperadosAtivos;
+    aggregatedData.recebido += obj.recebido;
+    aggregatedData.faturado += obj.faturado;
+    aggregatedData.glosado += obj.glosado;
+    aggregatedData.distinctCNPJCount++;
 
-    aggregatedData[monthYear].distinctCNPJCount += 1;
   });
 
-  return aggregatedData;
+    // Sort the array by mesAno in descending order
+    aggregatedDataArray.sort((a, b) => {
+      if (a.mesAno < b.mesAno) return 1;
+      if (a.mesAno > b.mesAno) return -1;
+      return 0;
+    });
+
+  return aggregatedDataArray;
 }
+
+// function GetAggregateData(data: ListaDeCliente[]): { [key: string]: AggregatedData } {
+//   const aggregatedData: { [key: string]: AggregatedData } = {};
+//   data.forEach(obj => {
+//     const monthYear = obj.mesreferente.slice(0, 7);
+
+//     if (!aggregatedData[monthYear]) {
+//       aggregatedData[monthYear] = {
+//         mesAno: monthYear,
+//         quantidadeGlosa: 0,
+//         licencasAtivas: 0,
+//         cooperadosAtivos: 0,
+//         recebido: 0,
+//         faturado: 0,
+//         glosado: 0,
+//         distinctCNPJCount: 0
+//       };
+//     }
+
+//     aggregatedData[monthYear].quantidadeGlosa += obj.quantidadeGlosa;
+//     aggregatedData[monthYear].licencasAtivas += obj.medicalLicencasAtivas;
+//     aggregatedData[monthYear].recebido += obj.recebido;
+//     aggregatedData[monthYear].cooperadosAtivos += obj.cooperadosAtivos;
+//     aggregatedData[monthYear].faturado += obj.faturado;
+//     aggregatedData[monthYear].glosado += obj.glosado;
+//     aggregatedData[monthYear].distinctCNPJCount += 1;
+//   });
+
+//   return aggregatedData;
+// }
 
 
 // function GetAggregateData(data: ListaDeCliente[]): AggregatedData[] {
@@ -110,6 +140,7 @@ function GetAggregateData(data: ListaDeCliente[]): { [key: string]: AggregatedDa
 //         mesAno: monthYear,
 //         quantidadeGlosa: 0,
 //         licencasAtivas: 0,
+//         cooperadosAtivos: 0,
 //         recebido: 0,
 //         faturado: 0,
 //         glosado: 0,

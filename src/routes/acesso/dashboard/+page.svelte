@@ -1,17 +1,10 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-
-
-    import { onMount } from 'svelte';
-
-    import * as Card from "$lib/components/ui/card/index";
-    import aggregatedStore from '$lib/stores/Aggregated';
-	import * as Select from '$lib/components/ui/select';
+  import type { PageData } from './$types';
+  import { onMount } from 'svelte';
+  import * as Card from "$lib/components/ui/card/index";
+  import aggregatedStore from '$lib/stores/Aggregated';
 	import * as Table from '$lib/components/ui/table';
   import Chart from 'chart.js/auto'
-
-  let pieChart = 'pie'
-  let barChart = 'bar'
 
   const data2 = [
     { year: 2018, count: 10 },
@@ -23,7 +16,7 @@
     { year: 2024, count: 28 },
   ];
 
-  function createChart(type: any, elementId: any, label: any) {
+  function createChart(type: any, elementId: any, label: any, chartLabel: any, data: any) {
     const acquisitionsElement = document.getElementById(elementId);
     if (!acquisitionsElement) {
       console.error('Element with id "Faturado" not found');
@@ -35,11 +28,14 @@
       {
         type: type,
         data: {
-          labels: data2.map(row => row.year),
+          // labels: data2.map(row => row.year),
+          labels: chartLabel,
+          // labels: data.aggregatedData.map(row => row.),
           datasets: [
             {
               label: label,
-              data: data2.map(row => row.count)
+              // data: data2.map(row => row.count)
+              data: data
             }
           ]
         }
@@ -57,7 +53,7 @@
     // Subscribe to changes in the aggregatedStore
     $: {
         const unsubscribe = aggregatedStore.subscribe(value => {
-            console.log(value);
+
             aggregatedData = value;
         });
 
@@ -65,11 +61,43 @@
         onMount(() => unsubscribe());
     }
 
+    // First, clone the array to avoid mutating the original data
+const sortedData = [...data.aggregatedData];
+
+// Sort the array based on the mesAno property in ascending order
+sortedData.sort((a, b) => {
+    // Assuming mesAno is in the format 'YYYY-MM', you can directly compare strings
+    return a.mesAno.localeCompare(b.mesAno);
+});
+
+// Now, map the sortedData array
+
+function rearrangeAndFilterData(aggregatedData: any): any {
+    // Clone the array to avoid mutating the original data
+    const sortedData = [...aggregatedData];
+
+    // Sort the array based on the mesAno property in ascending order
+    sortedData.sort((a, b) => {
+        return a.mesAno.localeCompare(b.mesAno);
+    });
+
+    // Filter the sorted array to take out entries where faturado is not > 0
+    const filteredData = sortedData.filter(row => row.faturado > 0);
+
+    // Return the rearrangedData array
+    return filteredData;
+}
+
+const rearrangedData = rearrangeAndFilterData(data.aggregatedData)
+
+console.log(sortedData)
+
     onMount(() => {
-    createChart('bar', 'Faturado', 'Faturado por Clientes / Ano');
-    createChart('pie', 'ClientesEstados', 'Divisão de Clientes Por Estados');
-    createChart('line', 'CooperadosPorMes', 'Cooperados Ativos x Mês');
-    createChart('pie', 'LicencasPorClientes', 'Numero de Licenças por Clientes');
+    createChart('line', 'Faturado', 'Faturado por Clientes / Mês', rearrangedData.map(row => row.mesAno), rearrangedData.map(row => row.faturado));
+    createChart('bar', 'CooperadosPorMes', 'Cooperados Ativos x Mês', rearrangedData.map(row => row.mesAno), rearrangedData.map(row => row.cooperadosAtivos));
+
+    createChart('pie', 'ClientesEstados', 'Divisão de Clientes Por Estados', data.aggregatedData.map(row => row.faturado));
+    createChart('pie', 'LicencasPorClientes', 'Numero de Licenças por Clientes', rearrangedData.map(row => row.cnpj), rearrangedData.map(row => row.licencasAtivas));
 });
 
 
@@ -78,13 +106,10 @@
     let p: { nomeFantasia: any; razaoSocial: any; cnpj: any; };
   "";
 
-  const fruits = [
-      { value: "apple", label: "Apple" },
-      { value: "banana", label: "Banana" },
-      { value: "blueberry", label: "Blueberry" },
-      { value: "grapes", label: "Grapes" },
-      { value: "pineappyle", label: "Pineapple" }
-    ];
+  function formatCurrency(value: number | bigint) {
+    if (!value && value !== 0) return '-'; // Handle null, undefined, or empty values
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+  }
 
 
   </script>
@@ -92,25 +117,6 @@
 
 <div class="sticky top-0 z-1">
     <h1 class="font-bold my-4 text-4xl font-mono text-left mx-12">Visão Geral</h1>
-    <!-- <div class="flex justify-end mx-12">
-        <Select.Root >
-            <Select.Trigger class="w-[180px]">
-              <Select.Value placeholder="Status" />
-            </Select.Trigger>
-            <Select.Content>
-              <Select.Group>
-                <Select.Label>Fruits</Select.Label>
-                {#each fruits as fruit}
-                  <Select.Item value={data.aggregatedData} label={data.aggregatedData?.toString()}
-                    >{fruit.label}</Select.Item
-                  >
-                {/each}
-              </Select.Group>
-            </Select.Content>
-            <Select.Input name="favoriteFruit" />
-          </Select.Root>
-
-    </div> -->
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mx-12 my-4">
       <Card.Root class="transform hover:scale-105 transition duration-300">
         <Card.Header
@@ -120,8 +126,8 @@
           <!-- <DollarSign class="h-4 w-4 text-muted-foreground" /> -->
         </Card.Header>
         <Card.Content class="shadow-sm">
-            <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData['2024-03'].distinctCNPJCount : '-'}</div>
-          <p class="text-xs text-muted-foreground">+20.1% from last month</p>
+            <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData[0].distinctCNPJCount : '-'}</div>
+          <p class="text-xs text-muted-foreground">Referente a {data.aggregatedData[0].mesAno}</p>
         </Card.Content>
       </Card.Root>
       <Card.Root class="transform hover:scale-105 transition duration-300">
@@ -132,32 +138,32 @@
           <!-- <Users class="h-4 w-4 text-muted-foreground" /> -->
         </Card.Header>
         <Card.Content class="shadow-sm">
-            <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData['2024-03'].licencasAtivas : '-'}</div>
-          <p class="text-xs text-muted-foreground">+180.1% from last month</p>
+            <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData[0].licencasAtivas : '-'}</div>
+          <p class="text-xs text-muted-foreground">{`${(data.aggregatedData[0].licencasAtivas - data.aggregatedData[1].licencasAtivas) >= 0 ? '+' : ''}${data.aggregatedData[0].licencasAtivas - data.aggregatedData[1].licencasAtivas}`} em relação ao ultimo mês.</p>
         </Card.Content>
       </Card.Root>
       <Card.Root class="transform hover:scale-105 transition duration-300">
         <Card.Header
           class="flex flex-row items-center justify-between space-y-0 pb-2"
         >
-          <Card.Title class="text-sm font-medium">Cooperados Cadastrados</Card.Title>
+          <Card.Title class="text-sm font-medium">Cooperados Ativos</Card.Title>
           <!-- <CreditCard class="h-4 w-4 text-muted-foreground" /> -->
         </Card.Header>
         <Card.Content class="shadow-sm">
-            <!-- <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData['2024-03']. : '-'}</div> -->
-          <p class="text-xs text-muted-foreground">+19% from last month</p>
+            <div class="text-2xl font-bold">{data.aggregatedData ? data.aggregatedData[0].cooperadosAtivos : '-'}</div>
+          <p class="text-xs text-muted-foreground">{data.aggregatedData[0].cooperadosAtivos - data.aggregatedData[1].cooperadosAtivos} em relação ao ultimo mês.</p>
         </Card.Content>
       </Card.Root>
       <Card.Root class="transform hover:scale-105 transition duration-300">
         <Card.Header
           class="flex flex-row items-center justify-between space-y-0 pb-2"
         >
-          <Card.Title class="text-sm font-medium">Numero de Cooperados</Card.Title>
+          <Card.Title class="text-sm font-medium">Faturado Total</Card.Title>
           <!-- <Activity class="h-4 w-4 text-muted-foreground" /> -->
         </Card.Header>
         <Card.Content class="shadow-sm">
-          <div class="text-2xl font-bold">+573</div>
-          <p class="text-xs text-muted-foreground">+201 since last hour</p>
+          <div class="text-2xl font-bold">{formatCurrency(data.aggregatedData ? data.aggregatedData[0].faturado : 0)}</div>
+          <p class="text-xs text-muted-foreground">{formatCurrency((data.aggregatedData[0].faturado ? data.aggregatedData[0].faturado : 0) - (data.aggregatedData[1].faturado ? data.aggregatedData[1].faturado : 0))} em relação ao ultimo periodo.</p>
         </Card.Content>
       </Card.Root>
     </div>
