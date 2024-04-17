@@ -74,7 +74,7 @@
 
 <div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 justify-center bg-white" >
 <!-- component -->
-  <div class="overflow-hidden flex-grid min-w-full px-10 border-indigo-400 mt-4 justify-center bg-white">
+  <div class="overflow-hidden flex-grid min-w-full border-indigo-400 mt-4 justify-center bg-white">
     <!-- Your scrolling component goes here -->
     <!-- Assuming this is where your scrolling component goes -->
     <WlxTable bind:cliente2={p} {clientes}></WlxTable>

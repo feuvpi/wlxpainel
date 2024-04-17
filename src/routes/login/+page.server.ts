@@ -1,4 +1,3 @@
-import type { PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit'
 import jwt from 'jsonwebtoken'
 
@@ -37,7 +36,7 @@ export const actions = {
             });
             throw redirect(302, '/acesso/clientes');
         } else {
-            return fail(422, { errors: await response.json() });
+            return fail(422, { errors: await response.json() }), {fail: true};
     }
     }
 }

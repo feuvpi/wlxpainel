@@ -8,7 +8,6 @@ export let clientes;
 export let cliente2;
 
      function handleEdit(cliente){
-      console.log("Entrei")
       cliente2 = cliente
      }
 
@@ -18,10 +17,9 @@ export let cliente2;
 
 
 </script>
-<!-- <div class="overflow-hidden min-w-full pl-2 mt-4 ml-8"> -->
-  <!-- <Button class="bg-slate-400">Adicionar</Button> -->
 
-  <Table.Root class="w-fit px-8 self-center border-red-500 scroll-table overflow-hidden " >
+
+  <Table.Root class="w-fit self-center border-2 scroll-table overflow-hidden " >
     <Table.Caption>Lista de Clientes</Table.Caption>
     <Table.Header>
       <Table.Row>
@@ -45,7 +43,5 @@ export let cliente2;
       {/each}
     </Table.Body>
   </Table.Root>
-
-<!-- </div> -->
 
 

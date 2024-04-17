@@ -26,7 +26,7 @@
 </script>
 
 
-<AnimatedRoute>
+
 
 <div class={style.container} >
 	<TopBar />
@@ -37,13 +37,15 @@
 		<div class={style.mainContainer}>
 			
 			<main class={style.main}>
+				<AnimatedRoute>
 				<slot />
+			</AnimatedRoute>
 			</main>
 		</div>
 	</div>
 </div>
 
-</AnimatedRoute>
+
 
 
 <!-- style="background: -webkit-linear-gradient(90deg, hsla(169, 64%, 44%, 1) 0%, hsla(202, 99%, 37%, 1) 100%);" -->
