@@ -11,11 +11,11 @@
       console.log('Data updated:', data);
       previousData = data; // Update the previousData variable
     }
-  }
-
-    
+  }  
 </script>
-
+<svelte:head>
+    <title>Login - Painel Weblynx</title> 
+</svelte:head>
 <!-- component -->
 <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background: -webkit-linear-gradient(90deg, hsla(169, 64%, 44%, 1) 0%, hsla(202, 99%, 37%, 1) 100%);">
     <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 pt-10 pb-4 shadow-lg backdrop-blur-md max-sm:px-8">
