@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { PageData } from './$types';
-    
+    import Logo from '$lib/shared/logo-weblynx-branca.png';
     export let data: PageData;
     export let form;
     let previousData = data;
@@ -21,7 +21,7 @@
     <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 pt-10 pb-4 shadow-lg backdrop-blur-md max-sm:px-8">
       <div class="text-white">
         <div class="mb-8 flex flex-col items-center">
-            <img src="src/lib/shared/logo_weblynx.png" width="300" alt="Logo" />
+            <img src="{Logo}" width="300" alt="Logo" />
         </div>
         <form class="h-56" action="/login" method="POST">
           <div class="mb-4 text-lg flex justify-center">
