@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 export const actions = {
     default: async({ request, cookies }) => {
         const data = await request.formData();
-        const login = data.get('email')?.toString()?? ""
+        const login = data.get('usuario')?.toString()?? ""
         const senha = data.get('password')?.toString()?? ""
         const api_url = import.meta.env.VITE_API_BASE_URL
 

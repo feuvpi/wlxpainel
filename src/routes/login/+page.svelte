@@ -25,7 +25,7 @@
         </div>
         <form class="h-56" action="/login" method="POST">
           <div class="mb-4 text-lg flex justify-center">
-            <input class="focus:border-teal-600 border-4 border-transparent rounded-3xl bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="email" placeholder="Digite seu e-mail" />
+            <input class="focus:border-teal-600 border-4 border-transparent rounded-3xl bg-sky-400 bg-opacity-50 px-10 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="usuario" placeholder="Digite seu usuário" />
           </div>
   
           <div class="flex justify-center mb-4 text-lg">

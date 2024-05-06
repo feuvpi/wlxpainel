@@ -2,7 +2,7 @@
     let titulo = "Weblynx";
     import type { PageData } from './$types';
     import * as Table from "$lib/components/ui/table/index.js";
-
+    import ControlBarRelatorio from '$lib/components/ControlBarRelatorio.svelte';
 
     export let data: PageData;
     const clientes = data.clientes;
@@ -11,6 +11,7 @@
 <div>
     <div class="bg-white pt-10 w-9/12 m-auto">
         <h1 class=" text-slate-800 text-center text-4xl mb-10">Relatório</h1>
+        <div><ControlBarRelatorio/></div>
 
         <Table.Root>
             
