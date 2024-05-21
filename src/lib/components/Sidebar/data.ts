@@ -22,5 +22,10 @@ export const data = [
 		title: 'Produtos',
 		icon: BillsIcon,
 		link: '/acesso/produtos'
+	},
+	{
+		title: 'Blog',
+		icon: AnalyticsIcon,
+		link: '/acesso/Posts'
 	}
 ];

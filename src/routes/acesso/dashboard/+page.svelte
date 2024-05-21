@@ -96,7 +96,7 @@ console.log(sortedData)
     createChart('line', 'Faturado', 'Faturado por Clientes / Mês', rearrangedData.map(row => row.mesAno), rearrangedData.map(row => row.faturado));
     createChart('bar', 'CooperadosPorMes', 'Cooperados Ativos x Mês', rearrangedData.map(row => row.mesAno), rearrangedData.map(row => row.cooperadosAtivos));
 
-    createChart('pie', 'ClientesEstados', 'Divisão de Clientes Por Estados', data.aggregatedData.map(row => row.faturado));
+    // createChart('pie', 'ClientesEstados', 'Divisão de Clientes Por Estados', data.aggregatedData.map(row => row.faturado));
     createChart('pie', 'LicencasPorClientes', 'Numero de Licenças por Clientes', rearrangedData.map(row => row.cnpj), rearrangedData.map(row => row.licencasAtivas));
 });
 

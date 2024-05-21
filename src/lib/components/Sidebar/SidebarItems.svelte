@@ -13,7 +13,7 @@
 	};
 </script>
 
-<ul class="md:pl-5">
+<ul class="md:px-2">
 	<li>
 		{#each data as item (item.title)}
 			<a
@@ -21,7 +21,7 @@
 				class={`${style.link} 
             ${item.link === $page.url.pathname ? style.active : style.inactive}`}
 			>
-				<span><svelte:component this={item.icon} /></span>
+				<span class="text-white"><svelte:component this={item.icon} /></span>
 				<span class={`${style.title} ${$sidebarOpen ? style.open : style.close}`}>
 					{item.title}
 				</span>
