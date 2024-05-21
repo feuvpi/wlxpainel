@@ -26,6 +26,6 @@ export const data = [
 	{
 		title: 'Blog',
 		icon: AnalyticsIcon,
-		link: '/acesso/Posts'
+		link: '/acesso/posts'
 	}
 ];
